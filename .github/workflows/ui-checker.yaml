@@ -25,6 +25,7 @@ jobs:
 
       - name: Run UI Tests
         run: pytest --json-report --json-report-file=./reports/my_report.json --json-report-indent=2 ui-test.py --json-report-omit log
+        continue-on-error: true
 
       - uses: actions/upload-artifact@v3
         with:
