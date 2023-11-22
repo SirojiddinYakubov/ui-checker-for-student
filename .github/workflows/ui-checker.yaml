@@ -23,9 +23,6 @@ jobs:
       - name: Curl
         run: curl -v http://127.0.0.1:8000/
 
-      #      - name: run newman
-      #        run: npm install -g newman && newman run api-checker.postman_collection.json --verbose -r cli,json
-
       - name: Run UI Tests
         run: pytest --json-report --json-report-file=./reports/my_report.json --json-report-indent=2 ui-test.py --json-report-omit log
 
