@@ -14,8 +14,8 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
-      - name: Install requirements
-        run: playwright install
+      - name: Install playwright
+        run: pip install pytest-playwright && playwright install
 
       - name: Run app
         run: docker compose up -d --build
