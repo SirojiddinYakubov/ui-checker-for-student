@@ -15,10 +15,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install requirements
-        run: pip install -r requirements.txt && playwright install
+        run: playwright install
 
-      - name: Run project
-        run: gunicorn -b 0.0.0.0:8000 --workers=49 --threads=2 core.wsgi --reload --daemon
+      - name: Run app
+        run: docker compose up -d --build
 
       - name: Curl
         run: curl -v http://127.0.0.1:8000/
