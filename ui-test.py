@@ -12,7 +12,7 @@ def test_example(page: Page) -> None:
     expect(page.locator("#services")).to_contain_text("Services we offer")
     expect(page.locator("#contact")).to_contain_text("Contact us")
     expect(page.locator("#navbarSupportedContent")).to_contain_text("Home")
-    expect(page.locator("#navbarSupportedContent")).to_contain_text("About")
+    expect(page.locator("#navbarSupportedContent")).to_contain_text("About 2")
     page.get_by_role("link", name="Home", exact=True).click()
     expect(page.locator(".feature").first).to_be_visible()
     expect(page.locator("div:nth-child(2) > .card > .card-body > .feature")).to_be_visible()
