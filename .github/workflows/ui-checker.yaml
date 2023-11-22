@@ -1,0 +1,35 @@
+name: UI Check CI/CD
+on:
+  workflow_dispatch:
+  push:
+    branches: [ test ]
+jobs:
+  deploy:
+    name: ui check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Run project
+        run: gunicorn -b 0.0.0.0:8000 --workers=49 --threads=2 core.wsgi --reload --daemon
+
+      - name: Curl
+        run: curl -v http://127.0.0.1:8000/
+
+      #      - name: run newman
+      #        run: npm install -g newman && newman run api-checker.postman_collection.json --verbose -r cli,json
+
+      - name: Run UI Tests
+        run: pytest --json-report --json-report-file=./reports/my_report.json --json-report-indent=2 ui-test.py --json-report-omit log
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ./reports/my_report.json
