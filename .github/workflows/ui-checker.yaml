@@ -33,3 +33,9 @@ jobs:
         with:
           name: my-artifact
           path: ./reports/my_report.json
+
+      - name: Send run_id
+        run: |
+          curl --location 'https://api.mohirpool.uz/api/accelerator/github/actions-run-create/${{ github.actor }}/' \
+          --header 'X-API-KEY: ${{ secrets.X_API_KEY }}' \
+          --form 'actions_run_id=${{ github.run_id }}'
