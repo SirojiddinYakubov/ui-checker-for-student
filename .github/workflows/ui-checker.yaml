@@ -38,4 +38,5 @@ jobs:
         run: |
           curl --location 'https://api.mohirpool.uz/api/accelerator/github/actions-run-create/${{ github.actor }}/' \
           --header 'X-API-KEY: ${{ secrets.X_API_KEY }}' \
-          --form 'actions_run_id=${{ github.run_id }}'
+          --form 'actions_run_id=${{ github.run_id }}' \
+          --form 'project=${{ secrets.PROJECT_ID }}'
