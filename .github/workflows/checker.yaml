@@ -23,6 +23,10 @@ jobs:
           sleep 5s
           curl -v http://127.0.0.1:8000/
 
+      - name: Download UI Test File
+        run: |
+          curl -L "${{ secrets.CHECK_FILE }}" > ui-test.py
+
       - name: Run UI Tests
         run: pytest --json-report --json-report-file=./reports/my_report.json --json-report-indent=2 ui-test.py
         continue-on-error: true
