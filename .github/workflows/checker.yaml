@@ -28,13 +28,13 @@ jobs:
           curl -L "${{ secrets.CHECK_FILE }}" > ui-test.py
 
       - name: Run UI Tests
-        run: pytest --json-report --json-report-file=./reports/my_report.json --json-report-indent=2 ui-test.py
+        run: pytest --json-report --json-report-file=./reports/ui-checker-report.json --json-report-indent=2 ui-test.py
         continue-on-error: true
 
       - uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
-          path: ./reports/my_report.json
+          name: ui-checker-artifact
+          path: ./reports/ui-checker-report.json
 
       - name: Send run_id
         run: |
